@@ -15,8 +15,9 @@
 		<script>
 			$(window).on('load', function() {
 				window.audio = new SoundLab();
-				audio.load('/path/to/yr/sample.mp3', function() {
-					this.play();
+				audio.load('/soundlab/music/daftpunk.mp3', function() {
+					window.song = this;
+					window.song.play();
 				}, true);
 			});
 		</script>

@@ -36,3 +36,10 @@ Change the speed of an audio source by calling `.speed()` and supplying a speec 
 	sound.speed(3); // Triple speed
 	sound.speed(0.5); // Half speed
 	sound.speed(100); // Are you crazy?
+
+#### Delay
+
+Add a delay effect by calling `.delay()` on a source node. This creates a DelayNode for the source to pass through.
+
+	sound.delay(10); // Moar delay
+	sound.delay(0);  // No delay

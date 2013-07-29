@@ -29,6 +29,9 @@ var SLSound = function(buffer, context, output) {
 	this.output = typeof output === null ? this.context.destination : output;
 	this.trackTime = 0;
 	this.trackTimer = null;
+
+	// Effect nodes
+	this.delayNode = null;
 }
 SLSound.prototype.play = function() {
 	var self = this;
@@ -53,6 +56,14 @@ SLSound.prototype.createBufferSource = function() {
 	this.source.connect(this.output);
 }
 
-SLSound.prototype.delay = function() {
+SLSound.prototype.delay = function(time) {
+	if (this.delayNode === null) {
+		this.delayNode = this.context.createDelayNode();
 
+		// Re-wire the source node to go through the Delay node also
+		this.delayNode.connect(this.context.destination);
+		this.source.connect(this.delayNode);
+	}
+
+	this.delayNode.delayTime.setValueAtTime(time, 0);
 }
