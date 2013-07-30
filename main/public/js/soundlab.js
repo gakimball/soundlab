@@ -36,7 +36,7 @@ var SLSound = function (buffer, context, output) {
 	this.delayNode = null;
 
   // Reduced transport into function for DRY-er code
-  this.startTransport = function() {
+  this.startTransport = function(timeElement) {
     return this.trackTimer = setInterval(function() {
 
       // Webaudio API uses whole seconds instead of milliseconds - Dumb
@@ -46,19 +46,22 @@ var SLSound = function (buffer, context, output) {
       // While doing so, JavaScript likes to add a .0000000001 occasionally -
       // Tried to use the 'Math' object to fix it, but I'll let it slide for now
 
-      // console.log(self.trackTime); // Comment out for console cleanliness
-	  }, 100);
+      console.log(self.trackTime); // Comment out for console cleanliness
+	    $(timeElement).html(self.trackTime.toFixed(0));
+    }, 100);
   };
 };
 
-SLSound.prototype.play = function () {
+SLSound.prototype.play = function (timeElement) {
 	this.createBufferSource();
+  this.source.start(0);
+
 
   //  The first argument in the start() function accepts an offset before starting the sound, now where in the buffer to start
   //	this.source.start(this.trackTime);
 
   this.paused = 0;
-  this.startTransport();
+  this.startTransport(timeElement);
 };
 
 SLSound.prototype.pause = function () {
@@ -67,14 +70,14 @@ SLSound.prototype.pause = function () {
   this.paused = 1;
 };
 
-SLSound.prototype.resume = function () {
+SLSound.prototype.resume = function (timeElement) {
   if (this.paused === 1) {
     this.createBufferSource();
 
     // Start immediately at specific time in the buffer
     this.source.start(0, this.trackTime);
     this.paused = 0;
-    this.startTransport();
+    this.startTransport(timeElement);
   }
 };
 
