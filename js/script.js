@@ -1,7 +1,7 @@
 $(window).on('load', function () {
   var audio, song;
   audio = new SoundLab();
-  audio.load('/public/music/daftpunk.mp3', function() {
+  audio.load('/music/daftpunk.mp3', function() {
     song = this;
     song.play('#song-time');
   }, true);
