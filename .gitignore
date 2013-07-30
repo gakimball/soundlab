@@ -2,3 +2,5 @@
 
 # Ignoring the copyrighted music I'm testing with
 main/public/music/*
+
+*.pyc
