@@ -1,4 +1,4 @@
 .DS_Store
 
 # Ignoring the copyrighted music I'm testing with
-music/*
+main/public/music/*
